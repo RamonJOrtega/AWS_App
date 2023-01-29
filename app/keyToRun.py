@@ -9,18 +9,27 @@ def main():
     parser.add_argument("--input", "-i", type=str, required=True)
     args = parser.parse_args()
     user_input = args.input
-    print(f"User input: {user_input}")
-    generate_branding_snippet(user_input)
-    pass
 
-def generate_branding_snippet(prompt: str):
+    print(f"User input: {user_input}")
+    result = generate_branding_snippet(user_input)
+
+def generate_branding_snippet(prompt: str) -> str:
     # Load your API key from an environment variable or secret management service
     openai.api_key = os.getenv("OPENAI_API_KEY")
     enriched_prompt = f"Generate upbeat branding snippet for {prompt}: "
-    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.5, max_tokens=100)
+    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.5, max_tokens=32)
     
-    print(response)
-    branding_text = response["choices"][0]["text"]
+    #extract output text.
+    branding_text: str = response["choices"][0]["text"]
+
+    #strip whitespace
+    branding_text = branding_text.strip()
+    # add ... to truncated statementss
+    last_char = branding_text[-1]
+
+    if last_char not in {".", "!", "?"}:
+        branding_text += "..."
+
     print(branding_text)
 
 if __name__ == "__main__":
