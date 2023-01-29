@@ -20,6 +20,8 @@ def generate_branding_snippet(prompt: str):
     response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.5, max_tokens=100)
     
     print(response)
+    branding_text = response["choices"][0]["text"]
+    print(branding_text)
 
 if __name__ == "__main__":
     main()
