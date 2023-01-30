@@ -4,10 +4,9 @@ import openai
 import argparse
 import re
 
-MAX_INPUT_LENGTH = 12
+MAX_INPUT_LENGTH = 32
 
 def main():
-    print("Running keyToRun.py")
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", "-i", type=str, required=True)
@@ -18,8 +17,6 @@ def main():
     if validate_length(user_input):
         branding_result = generate_branding_snippet(user_input)
         keywords_result = generate_keywords(user_input)
-        print(branding_result)
-        print(keywords_result)
     else:
         raise ValueError(
             f"Input length is too long. Must be under {MAX_INPUT_LENGTH}. Submitted input is {user_input}" 
@@ -32,6 +29,8 @@ def generate_keywords(prompt: str) -> List[str]:
     # Load your API key from an environment variable or secret management service
     openai.api_key = os.getenv("OPENAI_API_KEY")
     enriched_prompt = f"Generate related branding keywords for {prompt}: "
+    print(enriched_prompt)
+    
     response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.1, max_tokens=32)
 
     #extract output text.
@@ -41,15 +40,17 @@ def generate_keywords(prompt: str) -> List[str]:
     keywords_array = re.split("[0-9.\n]", keywords_text) ## delimite by digits 0-10, period, and newline
     keywords_array = [k.lower().strip() for k in keywords_array] ## strip the whitespace in array elements
     keywords_array = [k for k in keywords_array if len(k) > 0] ## keep only the elements that are not empty
-    
+
+    print(f"Keywords: {keywords_array}")   
  
     return keywords_array
-
 
 def generate_branding_snippet(prompt: str) -> str:
     # Load your API key from an environment variable or secret management service
     openai.api_key = os.getenv("OPENAI_API_KEY")
     enriched_prompt = f"Generate upbeat branding snippet for {prompt}: "
+    print(enriched_prompt)
+
     response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.1, max_tokens=32)
     
     #extract output text.
@@ -61,6 +62,8 @@ def generate_branding_snippet(prompt: str) -> str:
     last_char = branding_text[-1]
     if last_char not in {".", "!", "?"}:
         branding_text += "..."
+
+    print(f"Snippet: {branding_text}")   
 
     return branding_text
 
