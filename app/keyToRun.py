@@ -1,4 +1,5 @@
 import os
+from typing import List
 import openai
 import argparse
 import re
@@ -17,25 +18,29 @@ def main():
     print(branding_result)
     print(keywords_result)
 
-def generate_keywords(prompt: str) -> str:
+def generate_keywords(prompt: str) -> List[str]:
     # Load your API key from an environment variable or secret management service
     openai.api_key = os.getenv("OPENAI_API_KEY")
     enriched_prompt = f"Generate related branding keywords for {prompt}: "
-    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.1, max_tokens=64)
+    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.1, max_tokens=32)
 
     #extract output text.
     keywords_text: str = response["choices"][0]["text"]
     #strip whitespace
     keywords_text = keywords_text.strip()
+    keywords_array = re.split("[0-9.\n]", keywords_text) ## delimite by digits 0-10, period, and newline
+    keywords_array = [k.lower().strip() for k in keywords_array] ## strip the whitespace in array elements
+    keywords_array = [k for k in keywords_array if len(k) > 0] ## keep only the elements that are not empty
+    
  
-    return keywords_text
+    return keywords_array
 
 
 def generate_branding_snippet(prompt: str) -> str:
     # Load your API key from an environment variable or secret management service
     openai.api_key = os.getenv("OPENAI_API_KEY")
     enriched_prompt = f"Generate upbeat branding snippet for {prompt}: "
-    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.1, max_tokens=200)
+    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.1, max_tokens=32)
     
     #extract output text.
     branding_text: str = response["choices"][0]["text"]
@@ -43,7 +48,7 @@ def generate_branding_snippet(prompt: str) -> str:
     #strip whitespace
     branding_text = branding_text.strip()
     # add ... to truncated statements
-    last_char = branding_text[-2]
+    last_char = branding_text[-1]
     if last_char not in {".", "!", "?"}:
         branding_text += "..."
 
