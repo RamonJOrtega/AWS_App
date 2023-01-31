@@ -1,6 +1,9 @@
 fastAPI
 __pycache__
+*.pyc
 typescript
+*.zip
+
 *.js
 !jest.config.js
 *.d.ts

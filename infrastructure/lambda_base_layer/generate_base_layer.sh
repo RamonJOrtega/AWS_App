@@ -3,7 +3,7 @@
 # remove the container if (it exists).
 docker rm layer-container
 # build a new base layer
-docker build -t base-layer
+docker build -t base-layer .
 #rename the base layer as layer-container
 docker run --name layer-container base-layer
 
