@@ -10,6 +10,6 @@ export class InfrastructureStack extends cdk.Stack {
       runtime: lambda.Runtime.PYTHON_3_9,
       code: lambda.Code.fromAsset("../app/"),
       handler: "myAPI.handler"
-    })
+    });
   }
 }
