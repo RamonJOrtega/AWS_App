@@ -18,4 +18,4 @@ npm -g install typescript
 cdk bootsrap aws://<12-digit-aws-accountnumber>/<zone. example us-east-w>
 cdk deploy (creates lambda function on your account)
 
-![alt text](link)
+![alt text](https://github.com/RamonJOrtega/AWS_App/blob/main/AppPicture.png)
