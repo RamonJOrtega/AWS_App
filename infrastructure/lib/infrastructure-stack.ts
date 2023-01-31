@@ -1,6 +1,9 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as dotenv from 'dotenv';
+
+dotenv.config()
 
 export class InfrastructureStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -15,7 +18,10 @@ export class InfrastructureStack extends cdk.Stack {
       runtime: lambda.Runtime.PYTHON_3_9,
       code: lambda.Code.fromAsset("../app/"),
       handler: "myAPI.handler",
-      layers: [layer,]
+      layers: [layer],
+      environment: {
+        "OPENAI_API_KEY": process.env.OPENAI_API_KEY ?? "",
+      }
     });
   }
 }
