@@ -17,7 +17,7 @@ const Form: React.FC<FormProps> = (props) => {
     return (
         <div>
             <p>Get a promo pitch and keywords for social media! </p>
-            <p>Tell us about your brand's product or service </p>
+            <p>Tell us about your brand&apos;s product or service </p>
 
             <input 
                 type="text" 
