@@ -3,13 +3,26 @@ import React from "react";
 const BrandHelper: React.FC = () => {
     const ENDPOINT = 'https://55mgcbkr77.execute-api.us-west-2.amazonaws.com/prod/generate_snippet_and_keywords';
     const [prompt, setPrompt] = React.useState("");
+    const [snippet, setSnippet] = React.useState("");
+    const [keywords, setKeywords] = React.useState([])
+
 
     const onSubmit = () => {
         console.log("Submitting: " + prompt);
         fetch(`${ENDPOINT}?prompt=${prompt}`)
             .then((res) => res.json())
-            .then(console.log);
+            .then(onResult);
     };
+
+    const onResult = (data: any) => {
+        setSnippet(data.snippet);
+        setKeywords(data.keywords);
+    }
+
+    console.log(snippet);
+    console.log(keywords);
+
+    let onResultsElement = null;
 
     return (
         <>
