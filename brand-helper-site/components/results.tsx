@@ -1,4 +1,5 @@
 interface ResultsProps {
+    prompt: string;
     snippet: string;
     keywords: string[];
     onBack: any;
@@ -8,9 +9,24 @@ interface ResultsProps {
 const Results: React.FC<ResultsProps> = (props) => {
     return (
         <div>
-            Here are your results
-            <div>Snippet: {props.snippet}</div>
-            <div>Keywords: {props.keywords.join(", ")}</div>
+            <div>
+                <div>
+                    <b>Prompt</b> 
+                </div> 
+                <div>{props.prompt}</div>
+            </div>
+            <div>
+                <div>
+                    <b>Snippet</b> 
+                </div> 
+                <div>{props.snippet}</div>
+            </div>
+            <div>
+                <div>
+                    <b>Keywords</b>
+                </div>
+                <div>{props.keywords.join(", ")}</div> 
+            </div>
             <button onClick={props.onBack}>Back</button>
         </div>
     )
