@@ -3,6 +3,7 @@ import Form from "./form";
 import Results from "./results";
 
 const BrandHelper: React.FC = () => {
+    const CHARACTER_LIMIT: number = 32;
     const ENDPOINT = 'https://55mgcbkr77.execute-api.us-west-2.amazonaws.com/prod/generate_snippet_and_keywords';
     const [prompt, setPrompt] = React.useState("");
     const [snippet, setSnippet] = React.useState("");
@@ -34,7 +35,7 @@ const BrandHelper: React.FC = () => {
     if (hasResult) {
         displayedElement = <Results snippet={snippet} keywords={keywords} onBack={onReset} prompt={prompt} />
     } else {
-        displayedElement = <Form prompt={prompt} setPrompt={setPrompt} onSubmit={onSubmit} />;
+        displayedElement = <Form prompt={prompt} setPrompt={setPrompt} onSubmit={onSubmit} characterLimit={CHARACTER_LIMIT} />;
     }
     return (
         <>

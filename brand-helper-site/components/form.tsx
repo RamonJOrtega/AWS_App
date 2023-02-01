@@ -2,22 +2,30 @@ interface FormProps {
     prompt: string;
     setPrompt: any;
     onSubmit:any;
-
+    characterLimit: number;
 }
 
 const Form: React.FC<FormProps> = (props) => {
+    const isPromptValid = props.prompt.length <= props.characterLimit;
+    const updatePromptValue = (text: string) => {
+        if(text.length <= props.characterLimit) {
+            props.setPrompt(text);
+        }
+    }
+
     return (
         <div>
-            <p>Find the best promo pitch and keywords! </p>
-            <p>What is your brand product or service? </p>
+            <p>Get a promo pitch and keywords for social media! </p>
+            <p>Tell us about your brand's product or service </p>
 
             <input 
                 type="text" 
-                placeholder="wheels" 
+                placeholder="classy cocktails" 
                 value={props.prompt} 
-                onChange={(e) => props.setPrompt(e.currentTarget.value)}>
+                onChange={(e) => updatePromptValue(e.currentTarget.value)}>
                 </input>
-            <button onClick={props.onSubmit}>Submit</button>
+                <div>{props.prompt.length}/{props.characterLimit}</div>
+            <button onClick={props.onSubmit} disabled={!isPromptValid}>Submit</button>
         </div>
     );
 };

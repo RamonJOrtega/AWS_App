@@ -10,7 +10,9 @@ const Results: React.FC<ResultsProps> = (props) => {
 
     const keywordElements = [];
     for(let i = 0; i < props.keywords.length; i++) {
-        const element = <div key={i}>{props.keywords[i]}</div>;
+        const element = <div key={i}>#{props.keywords[i].replace("-","")}</div>;
+        //the replace methode here should really be fixed on the frontend in getAPIBrandingDataFromOpenAI.
+        //but for now keep it here. future issue to be submitted
         keywordElements.push(element);
     }
 
