@@ -6,7 +6,9 @@ const BrandHelper: React.FC = () => {
 
     const onSubmit = () => {
         console.log("Submitting: " + prompt);
-        fetch(`${ENDPOINT}?prompt=${prompt}`).then(console.log);
+        fetch(`${ENDPOINT}?prompt=${prompt}`)
+            .then((res) => res.json())
+            .then(console.log);
     };
 
     return (
