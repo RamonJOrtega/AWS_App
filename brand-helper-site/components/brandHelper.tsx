@@ -32,7 +32,7 @@ const BrandHelper: React.FC = () => {
 
     let ResultsElement = null;
     if (hasResult) {
-        displayedElement = <Results snippet={snippet} keywords={keywords} onBack={onReset} />
+        displayedElement = <Results snippet={snippet} keywords={keywords} onBack={onReset} prompt={prompt} />
     } else {
         displayedElement = <Form prompt={prompt} setPrompt={setPrompt} onSubmit={onSubmit} />;
     }
