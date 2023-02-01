@@ -16,16 +16,22 @@ const Form: React.FC<FormProps> = (props) => {
 
     return (
         <div>
-            <p>Get a promo pitch and keywords for social media! </p>
-            <p>Tell us about your brand&apos;s product or service </p>
+            <div className="mb-6 text-amber-50">
+                <p>Get a promo pitch and keywords for social media! </p>
+                <p>Tell us about your brand&apos;s product or service. </p>
+            </div>
 
-            <input 
+            <input
+                className="p-2 w-full rounded-md focus:outline-yellow-400 text-neutral-900" 
                 type="text" 
                 placeholder="classy cocktails" 
                 value={props.prompt} 
                 onChange={(e) => updatePromptValue(e.currentTarget.value)}>
                 </input>
-                <div>{props.prompt.length}/{props.characterLimit}</div>
+                <div className="flex justify-between my-2 text-neutral-600">
+                    <div>This is a status</div>
+                    {props.prompt.length}/{props.characterLimit}
+                </div>
             <button onClick={props.onSubmit} disabled={props.isLoading || !isPromptValid}>Submit</button>
         </div>
     );
