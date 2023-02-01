@@ -1,4 +1,4 @@
-# AWS_App
+# AWS_Marketing_App
 
 Clone this repository to display recommended branding snippets and keywords to the user!
 This app uses the openAI API.
