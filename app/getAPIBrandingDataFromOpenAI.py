@@ -31,7 +31,7 @@ def generate_keywords(prompt: str) -> List[str]:
     enriched_prompt = f"Generate related branding keywords for {prompt}: "
     print(enriched_prompt)
     
-    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.5, max_tokens=32)
+    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0, max_tokens=16)
 
     #extract output text.
     keywords_text: str = response["choices"][0]["text"]
@@ -48,10 +48,10 @@ def generate_keywords(prompt: str) -> List[str]:
 def generate_branding_snippet(prompt: str) -> str:
     # Load your API key from an environment variable or secret management service
     openai.api_key = os.getenv("OPENAI_API_KEY")
-    enriched_prompt = f"Generate upbeat branding snippet for {prompt}: "
+    enriched_prompt = f"Generate a very short, upbeat branding snippet for {prompt}: "
     print(enriched_prompt)
 
-    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.1, max_tokens=100)
+    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0, max_tokens=16)
     
     #extract output text.
     branding_text: str = response["choices"][0]["text"]
@@ -60,7 +60,7 @@ def generate_branding_snippet(prompt: str) -> str:
     branding_text = branding_text.strip()
     # add ... to truncated statements
     last_char = branding_text[-1]
-    if last_char not in {".", "!", "?"}:
+    if last_char not in {".", "!", "\\", "?"}:
         branding_text += "..."
 
     print(f"Snippet: {branding_text}")   

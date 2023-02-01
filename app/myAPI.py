@@ -12,7 +12,8 @@ app.add_middleware(
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_header=["*"]
+    allow_headers=["*"],
+    max_age=[60]
 )
 
 @app.get("/generate_snippet")
@@ -30,8 +31,9 @@ async def generate_keywords_api(prompt: str):
 @app.get("/generate_snippet_and_keywords")
 async def generate_keywords_api(prompt: str):
     validate_input_length(prompt)
-    snippet = generate_branding_snippet(prompt)
     keywords = generate_keywords(prompt)
+    snippet = generate_branding_snippet(prompt)
+
     return {"snippet": snippet, "keywords": keywords}
 
 def validate_input_length(prompt: str):
