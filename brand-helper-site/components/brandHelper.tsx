@@ -23,13 +23,16 @@ const BrandHelper: React.FC = () => {
         setHasResult(true);
     }
 
-    let displayedElement = null;
+    const onReset = () => {
+        setPrompt("");
+        setHasResult(false);
+    }
 
-    
+    let displayedElement = null;
 
     let ResultsElement = null;
     if (hasResult) {
-        displayedElement = <Results snippet={snippet} keywords={keywords} />
+        displayedElement = <Results snippet={snippet} keywords={keywords} onBack={onReset} />
     } else {
         displayedElement = <Form prompt={prompt} setPrompt={setPrompt} onSubmit={onSubmit} />;
     }

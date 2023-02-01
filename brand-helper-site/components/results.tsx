@@ -1,6 +1,7 @@
 interface ResultsProps {
     snippet: string;
     keywords: string[];
+    onBack: any;
 
 }
 
@@ -10,6 +11,7 @@ const Results: React.FC<ResultsProps> = (props) => {
             Here are your results
             <div>Snippet: {props.snippet}</div>
             <div>Keywords: {props.keywords.join(", ")}</div>
+            <button onClick={props.onBack}>Back</button>
         </div>
     )
 
