@@ -31,7 +31,7 @@ def generate_keywords(prompt: str) -> List[str]:
     enriched_prompt = f"Generate related branding keywords for {prompt}: "
     print(enriched_prompt)
     
-    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.1, max_tokens=32)
+    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0.5, max_tokens=32)
 
     #extract output text.
     keywords_text: str = response["choices"][0]["text"]
