@@ -1,7 +1,8 @@
 interface FormProps {
     prompt: string;
     setPrompt: any;
-    onSubmit:any;
+    onSubmit: any;
+    isLoading: boolean;
     characterLimit: number;
 }
 
@@ -25,7 +26,7 @@ const Form: React.FC<FormProps> = (props) => {
                 onChange={(e) => updatePromptValue(e.currentTarget.value)}>
                 </input>
                 <div>{props.prompt.length}/{props.characterLimit}</div>
-            <button onClick={props.onSubmit} disabled={!isPromptValid}>Submit</button>
+            <button onClick={props.onSubmit} disabled={props.isLoading || !isPromptValid}>Submit</button>
         </div>
     );
 };

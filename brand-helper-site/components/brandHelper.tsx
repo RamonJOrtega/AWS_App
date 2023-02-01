@@ -9,10 +9,11 @@ const BrandHelper: React.FC = () => {
     const [snippet, setSnippet] = React.useState("");
     const [keywords, setKeywords] = React.useState([]);
     const [hasResult, setHasResult] = React.useState(false);
-
+    const [isLoading, setIsLoading] = React.useState(false);
 
     const onSubmit = () => {
         console.log("Submitting: " + prompt);
+        setIsLoading(true);
         fetch(`${ENDPOINT}?prompt=${prompt}`)
             .then((res) => res.json())
             .then(onResult);
@@ -22,11 +23,13 @@ const BrandHelper: React.FC = () => {
         setSnippet(data.snippet);
         setKeywords(data.keywords);
         setHasResult(true);
+        setIsLoading(false);
     }
 
     const onReset = () => {
         setPrompt("");
         setHasResult(false);
+        setIsLoading(false);
     }
 
     let displayedElement = null;
@@ -35,7 +38,7 @@ const BrandHelper: React.FC = () => {
     if (hasResult) {
         displayedElement = <Results snippet={snippet} keywords={keywords} onBack={onReset} prompt={prompt} />
     } else {
-        displayedElement = <Form prompt={prompt} setPrompt={setPrompt} onSubmit={onSubmit} characterLimit={CHARACTER_LIMIT} />;
+        displayedElement = <Form prompt={prompt} setPrompt={setPrompt} onSubmit={onSubmit} isLoading={isLoading} characterLimit={CHARACTER_LIMIT} />;
     }
     return (
         <>
