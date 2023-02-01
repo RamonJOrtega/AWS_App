@@ -4,7 +4,8 @@ const BrandHelper: React.FC = () => {
     const ENDPOINT = 'https://55mgcbkr77.execute-api.us-west-2.amazonaws.com/prod/generate_snippet_and_keywords';
     const [prompt, setPrompt] = React.useState("");
     const [snippet, setSnippet] = React.useState("");
-    const [keywords, setKeywords] = React.useState([])
+    const [keywords, setKeywords] = React.useState([]);
+    const [hasResult, setHasResult] = React.useState(false);
 
 
     const onSubmit = () => {
@@ -17,12 +18,19 @@ const BrandHelper: React.FC = () => {
     const onResult = (data: any) => {
         setSnippet(data.snippet);
         setKeywords(data.keywords);
+        setHasResult(true);
     }
 
-    console.log(snippet);
-    console.log(keywords);
+    let ResultsElement = null;
+    if (hasResult) {
 
-    let onResultsElement = null;
+        ResultsElement = <div>
+            Here are your results
+            <div>Snippet: {snippet}</div>
+            <div>Keywords: {keywords}</div>
+
+        </div>
+    }
 
     return (
         <>
@@ -32,6 +40,7 @@ const BrandHelper: React.FC = () => {
 
             <input type="text" placeholder="wheels" value={prompt} onChange={(e) => setPrompt(e.currentTarget.value)}></input>
             <button onClick={onSubmit}>Submit</button>
+            {ResultsElement}
         </>
         
     );
