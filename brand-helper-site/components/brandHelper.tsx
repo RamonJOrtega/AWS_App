@@ -23,17 +23,20 @@ const BrandHelper: React.FC = () => {
         setHasResult(true);
     }
 
-    const formElement = <Form prompt={prompt} setPrompt={setPrompt} onSubmit={onSubmit} />;
+    let displayedElement = null;
+
+    
 
     let ResultsElement = null;
     if (hasResult) {
-        ResultsElement = <Results snippet={snippet} keywords={keywords} />
-    }   
+        displayedElement = <Results snippet={snippet} keywords={keywords} />
+    } else {
+        displayedElement = <Form prompt={prompt} setPrompt={setPrompt} onSubmit={onSubmit} />;
+    }
     return (
         <>
             <h1>Brand Marketing Helper</h1>
-            {formElement}
-            {ResultsElement}
+            {displayedElement}
         </>
     );
 };
