@@ -7,11 +7,18 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = (props) => {
-    const isPromptValid = props.prompt.length <= props.characterLimit;
+    const isPromptValid = props.prompt.length < props.characterLimit;
     const updatePromptValue = (text: string) => {
         if(text.length <= props.characterLimit) {
             props.setPrompt(text);
         }
+    }
+
+    let statusColor = "text-neutral-600";
+    let statusText = null;
+    if (!isPromptValid) {
+        statusColor = "text-yellow-400";
+        statusText = `Limit input to ${props.characterLimit} characters`;
     }
 
     return (
@@ -28,8 +35,8 @@ const Form: React.FC<FormProps> = (props) => {
                 value={props.prompt} 
                 onChange={(e) => updatePromptValue(e.currentTarget.value)}>
                 </input>
-                <div className="flex justify-between my-2 text-neutral-600">
-                    <div>This is a status</div>
+                <div className={statusColor + " flex justify-between my-2 text-sm"}>
+                    <div>{statusText}</div>
                     {props.prompt.length}/{props.characterLimit}
                 </div>
             <button onClick={props.onSubmit} disabled={props.isLoading || !isPromptValid}>Submit</button>
