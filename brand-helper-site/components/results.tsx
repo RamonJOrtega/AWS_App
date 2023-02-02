@@ -6,6 +6,7 @@ interface ResultsProps {
 
 }
 
+
 const Results: React.FC<ResultsProps> = (props) => {
 
     const keywordElements = [];
@@ -16,27 +17,32 @@ const Results: React.FC<ResultsProps> = (props) => {
         keywordElements.push(element);
     }
 
+    
+
+    const resultSection = (label: string, body: any) => {
+        return (
+        <div className="bg-neutral-800 p-4 my-2 rounded-md">
+            <div className="text-neutral-700 text-sm font-bold mb-4">{label}</div> 
+            <div>{body} </div>
+        </div>
+        )
+    }
+
+
     return (
         <div>
-            <div>
-                <div>
-                    <b>Prompt</b> 
-                </div> 
-                <div>{props.prompt}</div>
+            <div className="mb-6">
+                {resultSection("Prompt", <div className="text-lg font-bold">{props.prompt}</div>)}
+                {resultSection("Promo pitch", props.snippet)}
+                {resultSection("Keywords", keywordElements)}
+
             </div>
-            <div>
-                <div>
-                    <b>Snippet</b> 
-                </div> 
-                <div>{props.snippet}</div>
-            </div>
-            <div>
-                <div>
-                    <b>Keywords</b>
-                </div>
-                <div>{keywordElements}</div> 
-            </div>
-            <button onClick={props.onBack}>Back</button>
+          
+            <button className="bg-gradient-to-r from-amber-50 to-yellow-200
+             text-neutral-900 rounded-md disabled:opacity-10 w-full p-2 text-lg"
+                onClick={props.onBack}>
+                    Back
+                </button>
         </div>
     )
 
