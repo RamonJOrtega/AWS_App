@@ -17,6 +17,7 @@ const Results: React.FC<ResultsProps> = (props) => {
         keywordElements.push(element);
     }
 
+    const keywordElementsHolder = <div className="flex flex-wrap gap-2">{keywordElements}</div>
     
 
     const resultSection = (label: string, body: any) => {
@@ -32,9 +33,9 @@ const Results: React.FC<ResultsProps> = (props) => {
     return (
         <div>
             <div className="mb-6">
-                {resultSection("Prompt", <div className="text-lg font-bold">{props.prompt}</div>)}
+                {resultSection("A little info about the brand", <div className="text-lg font-bold">{props.prompt}</div>)}
                 {resultSection("Promo pitch", props.snippet)}
-                {resultSection("Keywords", keywordElements)}
+                {resultSection("Keywords", keywordElementsHolder)}
 
             </div>
           

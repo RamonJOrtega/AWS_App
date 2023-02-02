@@ -25,7 +25,7 @@ const Form: React.FC<FormProps> = (props) => {
         <div>
             <div className="mb-6 text-amber-50">
                 <p>Get a promo pitch and keywords for social media! </p>
-                <p>Tell us about your brand&apos;s product or service. </p>
+                <p>Tell us about your brand&apos;s product, service, or style. </p>
             </div>
 
             <input
