@@ -14,6 +14,7 @@ export default function Home() {
         <meta name="description" content="Generate brand pitches for you product" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <link href="/dist/output.css" rel="stylesheet"></link>
       </Head>
       
       <BrandHelper />
