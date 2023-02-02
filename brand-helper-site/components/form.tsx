@@ -35,11 +35,17 @@ const Form: React.FC<FormProps> = (props) => {
                 value={props.prompt} 
                 onChange={(e) => updatePromptValue(e.currentTarget.value)}>
                 </input>
-                <div className={statusColor + " flex justify-between my-2 text-sm"}>
+                <div className={statusColor + " flex justify-between my-2 text-sm mb-6"}>
                     <div>{statusText}</div>
                     {props.prompt.length}/{props.characterLimit}
                 </div>
-            <button onClick={props.onSubmit} disabled={props.isLoading || !isPromptValid}>Submit</button>
+            <button 
+            className="bg-gradient-to-r from-amber-50 to-yellow-200
+             text-neutral-900 rounded-md disabled:opacity-10 w-full p-2 text-lg" 
+                onClick={props.onSubmit} 
+                disabled={props.isLoading || !isPromptValid}>
+                    Submit
+                </button>
         </div>
     );
 };
