@@ -1,8 +1,10 @@
-#AWS_Marketing_App
+# AWS Marketing App
 
+# What Is It?
 Go to https://aws-marketing-app.vercel.app/ to try out the App!
 
 Then type in words about what your brand is, and get a social media caption and keywords! 
+
 If you live in the US near Oregon (AWS US-west-2 ), you can expect results in 2-3 seconds. If you live on the East coast, latency is about 8 seconds.
 
 This app creates a python API using FastAPI, which calls the openAI API.
