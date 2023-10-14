@@ -12,7 +12,9 @@ This is a `Saas` (`software as a service`) application.
 The service (backend) is an `API` written in `python` using `FastAPI` ajd hosted with `AWS Lambda` and `AWS API Gateway`.
 The service takes a prompt from a user and makes a call to the 3rd party `OpenAI` `API` which returns keyword results.
 The `AWS Lambda` service is triggered thru AWS `API gateway` which provides an endpoint with a URL query structure. 
-- Example: https://##mgcbkr##.execute-api.us-west-2.amazonaws.com/prod/generate_wods?prompt=classy_cocktail. - When an end point is queried, the backend gets `OpenAI data` and displays recommended branding captions and keywords to user.
+- Example: https://##mgcbkr##.execute-api.us-west-2.amazonaws.com/prod/generate_wods?prompt=classy_cocktail. 
+- When an end point is queried, the backend gets `OpenAI data` and displays recommended branding captions and keywords to user.
+- 
 The user communicates with the service via a front end written in `Typscript`, `React`, and `Next.js` which is all hosted on `Vercel`
 
 ### The `openAI` model called by this repo is GPT-3: `text-ada-001`.
