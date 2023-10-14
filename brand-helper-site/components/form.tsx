@@ -24,7 +24,7 @@ const Form: React.FC<FormProps> = (props) => {
     return (
         <div>
             <div className="mb-6 text-amber-50">
-                <p>Get a promo pitch and keywords for social media! </p>
+                <p>Get promo pitch and hashtags for social media posts! </p>
                 <p>Tell us about your brand&apos;s product, service, or style. </p>
             </div>
 
