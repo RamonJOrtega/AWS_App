@@ -14,10 +14,10 @@ The service takes a prompt from a user and makes a call to the 3rd party `OpenAI
 The `AWS Lambda` service is triggered thru AWS `API gateway` which provides an endpoint with a URL query structure. 
 - Example: https://##mgcbkr##.execute-api.us-west-2.amazonaws.com/prod/generate_wods?prompt=classy_cocktail. 
 - When an end point is queried, the backend gets `OpenAI data` and displays recommended branding captions and keywords to user.
-- 
+  
 The user communicates with the service via a front end written in `Typscript`, `React`, and `Next.js` which is all hosted on `Vercel`
 
-### The `openAI` model called by this repo is GPT-3: `text-ada-001`.
+### `openAI` Model : GPT-3: `text-ada-001`.
 - This is the fastsest, lowest cost, GPT model, capable of simple tasks.
 - The financial cost of running this app is currently `$0.0008`/`1000 tokens` or `$0.0052`/`request`
 - Each `request` is approximately 31 characters which usually equates to about `13 tokens`
