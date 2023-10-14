@@ -1,21 +1,22 @@
 # AWS Marketing App
 
-# What Is It?
+## What Is It?
 Go to https://aws-marketing-app.vercel.app/ to try out the App!
 
 Then type in words about what your brand is, and get a social media caption and keywords! 
 
 If you live in the US near Oregon (AWS US-west-2 ), you can expect results in 2-3 seconds. If you live on the East coast, latency is about 8 seconds.
 
-This app creates a python API using FastAPI, which calls the openAI API.
-The python API is embedded in the cloud via serverless Lamda function.
-The Lambda is triggered by the front-end thru AWS API gateway which provides an endpoint with query structure. Example: https://##mgcbkr##.execute-api.us-west-2.amazonaws.com/prod/generate_wods?prompt=classy_cocktail. When that end point is queried, the Frontend web host calls AWS backend host to get OpenAI data and display recommended branding captions and keywords to user.
+## About the App
+This app creates a `python` `API` using `FastAPI`, which makes a call to the `OpenAI` `API`.
+The `python` `API` runs in in the cloud via serverless `AWS` `Lamda`.
+The `Lambda` service is triggered by the front-end thru AWS `API gateway` which provides an endpoint with query structure. Example: https://##mgcbkr##.execute-api.us-west-2.amazonaws.com/prod/generate_wods?prompt=classy_cocktail. When that end point is queried, the Frontend web host calls AWS backend to get `OpenAI data` and display recommended branding captions and keywords to user.
 
-The openAI model called by this repo is GPT-3: text-ada-001.
+The openAI model called by this repo is GPT-3: `text-ada-001`.
 This is the fastsest, lowest cost, GPT model, capable of simple tasks.
 
 Front End:
-Typescript, NextJS, React, TailwindCSS, Vercel Hosting.
+`Typescript`, NextJS, React, TailwindCSS, Vercel Hosting.
 
 Back End:
 Python, FastAPI, AWS Lambda, , OpenAI, AWS CDK, Docker, GitHub, Linux, API Gateway Hosting.
