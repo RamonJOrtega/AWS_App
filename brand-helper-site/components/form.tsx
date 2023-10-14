@@ -18,7 +18,7 @@ const Form: React.FC<FormProps> = (props) => {
     let statusText = null;
     if (!isPromptValid) {
         statusColor = "text-yellow-400";
-        statusText = `Limit input to ${props.characterLimit} characters`;
+        statusText = `Limit input to less than ${props.characterLimit} characters`;
     }
 
     return (
@@ -37,7 +37,7 @@ const Form: React.FC<FormProps> = (props) => {
                 </input>
                 <div className={statusColor + " flex justify-between my-2 text-sm mb-6"}>
                     <div>{statusText}</div>
-                    {props.prompt.length}/{props.characterLimit}
+                    {props.prompt.length}/{props.characterLimit-1}
                 </div>
             <button 
             className="bg-gradient-to-r from-amber-50 to-yellow-200
