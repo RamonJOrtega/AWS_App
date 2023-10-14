@@ -55,7 +55,6 @@ const gradientTextStyle =
                         </div>
                         <div className={gradientTextStyle}>AI Generated</div>
                         <h1 className={gradientTextStyle + " text-2xl font-lightw-fit m-auto"} >Brand Marketing Help</h1>
-                        
                     </div>
                     {displayedElement}
                 </div>
