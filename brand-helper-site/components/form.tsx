@@ -21,6 +21,8 @@ const Form: React.FC<FormProps> = (props) => {
         statusText = `Limit input to less than ${props.characterLimit} characters`;
     }
 
+    let loadingMessage = props.isLoading ? 'AWS Lambda Service Loading. Wait 1-8 Seconds' : '';
+
     return (
         <div>
             <div className="mb-6 text-amber-50">
@@ -45,7 +47,8 @@ const Form: React.FC<FormProps> = (props) => {
                 onClick={props.onSubmit} 
                 disabled={props.isLoading || !isPromptValid}>
                     Submit
-                </button>
+            </button>
+            <div className="animate-pulse mt-6">{loadingMessage} </div>
         </div>
     );
 };
