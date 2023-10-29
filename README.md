@@ -3,6 +3,8 @@
 ## What Is It?
 Go to https://aws-marketing-app.vercel.app/ to try out the App!
 
+Or to enter the developement environment, entire `yarn install` from root folder, cd to the `brand-helper-site`, and enter `yarn run dev`
+
 Type in words describing your brand, and get a social media caption and keywords/hashtags! 
 
 If you live in the US near Oregon (AWS US-west-2 ), you can expect results in 2-3 seconds. If you live on the East coast, latency is about 8 seconds.
@@ -39,7 +41,6 @@ The user communicates with the service via a front end written in `Typscript`, `
 - `GitHub` version control 
 - `Linux` bash terminal for endpoint testing`
 - `Docker` 
-
 
 ## Repository File Structure
 
