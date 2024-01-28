@@ -1,11 +1,16 @@
 import os
 from typing import List
-import openai
+from openai import OpenAI
 import argparse
 import re
 
+# To minimize cost, target the gpt-3.5-turbo model endpoint at openAI
+# Limit the size of the prompt we give it in order to get better results
 MAX_INPUT_LENGTH = 32
+MODEL="gpt-3.5-turbo"
 
+# A function that allows the user to input a prompt from the command line.
+# Example: python3 getAPIBrandingDataFromOpenAI.py -i "cofee served from a caboose" 
 def main():
 
     parser = argparse.ArgumentParser()
@@ -22,19 +27,31 @@ def main():
             f"Input length is too long. Must be under {MAX_INPUT_LENGTH}. Submitted input is {user_input}" 
         )
 
+# A function that validates the length of the input
 def validate_length(prompt: str) -> bool:
     return len(prompt) <= MAX_INPUT_LENGTH
 
+# A function to generate an array of keywords or hashtags for social media
 def generate_keywords(prompt: str) -> List[str]:
     # Load your API key from an environment variable or secret management service
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+    OPENAI_API_KEY =  os.getenv("OPENAI_API_KEY")
+    client = OpenAI(api_key=OPENAI_API_KEY)
+
     enriched_prompt = f"Generate related branding keywords for {prompt}: "
     print(enriched_prompt)
-    
-    response = openai.Completion.create(model="text-ada-001", prompt=enriched_prompt, temperature=0, max_tokens=32)
+
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": enriched_prompt},
+        ],
+        temperature=0,
+    )
 
     #extract output text.
-    keywords_text: str = response["choices"][0]["text"]
+    keywords_text: str = response.choices[0].message.content
+    
     #strip whitespace
     keywords_text = keywords_text.strip()
     keywords_array = re.split("[0-9.\n]", keywords_text) ## delimite by digits 0-10, period, and newline
@@ -45,16 +62,26 @@ def generate_keywords(prompt: str) -> List[str]:
  
     return keywords_array
 
+# A function to generate a long string representing a social media caption
 def generate_branding_snippet(prompt: str) -> str:
-    # Load your API key from an environment variable or secret management service
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+       # Load your API key from an environment variable or secret management service
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    client = OpenAI(api_key=OPENAI_API_KEY);
+
     enriched_prompt = f"Generate a short, upbeat branding snippet for {prompt}: "
     print(enriched_prompt)
 
-    response = openai.Completion.create(model="text-davinci-003", prompt=enriched_prompt, temperature=0, max_tokens=32)
-    
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": enriched_prompt},
+        ],
+        temperature=0,
+    )
+
     #extract output text.
-    branding_text: str = response["choices"][0]["text"]
+    branding_text: str = response.choices[0].message.content
 
     #strip whitespace
     branding_text = branding_text.strip()
