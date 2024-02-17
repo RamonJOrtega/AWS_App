@@ -31,6 +31,11 @@ def main():
 def validate_length(prompt: str) -> bool:
     return len(prompt) <= MAX_INPUT_LENGTH
 
+def generate_snippet_and_keywords(prompt: str) -> {str, List[str]}:
+    snippet = generate_branding_snippet(prompt)
+    keywords = generate_keywords(prompt)
+    return {"snippet": snippet, "keywords": keywords}
+
 # A function to generate an array of keywords or hashtags for social media
 def generate_keywords(prompt: str) -> List[str]:
     # Load your API key from an environment variable or secret management service
@@ -64,14 +69,15 @@ def generate_keywords(prompt: str) -> List[str]:
 
 # A function to generate a long string representing a social media caption
 def generate_branding_snippet(prompt: str) -> str:
-       # Load your API key from an environment variable or secret management service
+    # Load your API key from an environment variable or secret management service
+    # in terminal enter "export OPENAI_API_KEY=xx-xxxxxxxxxx"
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=OPENAI_API_KEY);
 
     enriched_prompt = f"Generate a short, upbeat branding snippet for {prompt}: "
     print(enriched_prompt)
 
-    response = client.chat.completions.create(
+    response =  client.chat.completions.create(
         model=MODEL,
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
