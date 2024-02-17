@@ -1,98 +1,99 @@
 # AWS Marketing App
 
 ## What Is It?
-This App was created to demonstrate proficiency with serverless, cloud-based microservies, particularly `AWS Lambda` and `AWS API Gateway`.
-This App has been updated multiple times as OpenAI continues to deprecate old models.
-Go to https://aws-marketing-app.vercel.app/ to try out the App!
+-This App was created to demonstrate proficiency with serverless, cloud-based microservices, particularly `AWS Lambda` and `AWS API Gateway`.
+-This App has been updated as OpenAI continues to deprecate old models (such as`GPT-3` `text-ADA-001`).
 
-Type in words describing your brand, and get a social media caption and keywords/hashtags! 
+-Go to https://aws-marketing-app.vercel.app/ to try out the App!
+-Type in words describing your brand, and get a social media caption and keywords/hashtags! 
 
-If you live in the US near Oregon (AWS US-west-2 ), you can expect results in 2-3 seconds. 
-If you live on the East coast, latency can be 8 seconds for the 1st request but will improve the more you use the app.
+-If you live in the US near Oregon (AWS US-west-2 ), you can expect results in 2-3 seconds. 
+-If you live on the East coast, latency can be 8 seconds for the 1st request but will improve the more you use the app.
 
 ![alt text](https://github.com/RamonJOrtega/AWS_Marketing_App/blob/main/appPicture1.png)
 ![alt text](https://github.com/RamonJOrtega/AWS_Marketing_App/blob/main/appPictureLoading.png)
 ![alt text](https://github.com/RamonJOrtega/AWS_Marketing_App/blob/main/appPIcture2.png)
 
+### `openAI` Model: `GPT-3.5-Turbo`.
+- This is the fastest, lowest cost GPT model capable of simple tasks.
+- The financial cost of running this app is currently `$0.001`/`1000 tokens` or `$0.005`/`request`.
+- Each `request` is approximately 31 characters which usually equates to about `13 tokens`.
+- For `$5`/`month` the will serve approximately `960 requests`s.
+
 ## How the App Works
 - This is a `Saas` (`software as a service`) application.
-- The Infrastructure holds an `API` written in `python` using `FastAPI` and contained within `AWS Lambda` service on `AWS API Gateway`.
+- The infrastructure holds an `API` written in `python` using `FastAPI` and contained within `AWS Lambda` service on `AWS API Gateway`.
 - The `AWS Lambda` service takes a prompt from a user and makes a call to the 3rd party `OpenAI` `API` which returns keyword results.
-- The `AWS Lambda` service is triggered by AWS `API gateway` which recieves the promp from the user client in the form of a UIR provides an endpoint.
-- Serving as a proxy, between user client and `AWS Lambda `, `API Gateway` URIs looke like the following:
+- The `AWS Lambda` service is triggered by AWS `API gateway` which receives the prompt from the user client in the form of a URI endpoint.
+- Serving as a proxy, between user client and `AWS Lambda `, `API Gateway` URI endpoints look like the following:
 - https://##mgcbkr##.execute-api.us-west-2.amazonaws.com/prod/generate_wods?prompt=classy_cocktail. 
-- The `AWS Lambda` and `API Gateway` service are maintined via `AWS CDK`.
-- All `pip` python dependicies live in a `base layer` (created with `Docker`) within `AWS Lamba` 
+- The `AWS Lambda` and `API Gateway` service are maintained via `AWS CDK`.
+- All `pip` python dependencies live in a `base layer` (created with `Docker`) within `AWS Lamba` 
   
-The user communicates with the backend infrastructure stack via a front end written in `Typscript`, `React`, and `Next.js` which is all hosted on `Vercel`
-
-### `openAI` Model: `GPT-3.5-Turbo`.
-- This is the fastsest, lowest cost, GPT model, capable of simple tasks.
-- The financial cost of running this app is currently `$0.001`/`1000 tokens` or `$0.005`/`request`
-- Each `request` is approximately 31 characters which usually equates to about `13 tokens`
-- For `$5`/`month` the will serve approximately `960 requests`s
+The user communicates with the backend infrastructure stack via a static front end written in `Typescript`, `React`, and `Next.js` which is all hosted free on `Vercel`
 
 ### Front End Tech Stack
 - `Typescript` language
-- `NextJS` and `React` main framworks
+- `NextJS` and `React` main JavaScript frameworks
 - `TailwindCSS` styling framework
-- `Vercel` hosting
+- `Vercel` web hosting and continuous deployment
+- `GitHub` version control
 
-### Back End Tech Stack
+### Back End Infrastructure Tech Stack
 - `Python` language
-- `FastAPI` framework
+- `FastAPI` framework for handling user prompts
 - `AWS` `Lambda` and `API Gateway` hosting
 - `OpenAI` for content generation
-- `AWS CDK` and `Docker` for infrastructure management
+- `AWS CDK` and `Docker` for infrastructure stack and base-layer deployment
 - `GitHub` version control 
-- `Linux` bash terminal for endpoint testing`
+- `Amazon Linux` bash terminal for endpoint testing
 - `Docker` container setup for AWS Service
 
 ## Repository File Structure
 
-### /infrastructure
-The AWS infrastructure generated by AWS CDK lives in the `/infrastructure` folder.
-The `lib` foldercontains `infrastructure as code`.
-The `lambda_base_layer` contains the dockerfile and base layer script used to genearate the linux machine configuration that gets deployed to `AWS Lambda`
-Every time you make a change to the infrastructure, you need to save and run "cdk deploy" to update the AWS Lambda service on AWS API Gateway.
+### /infrastructure folder
+The AWS infrastructure generated by `AWS CDK` lives in the `/infrastructure` folder.
+The `lib` folder contains `infrastructure as code`.
+The `lambda_base_layer` contains the dockerfile and base layer script used to generate the `Amazon Linux` operating system configuration that gets deployed to `AWS Lambda`
+Every time changes are made to the infrastructure, run "cdk deploy" to update the `AWS Lambda` service on `AWS API Gateway`.
 
-## /app
-The python API and FastAPI backend live in the the `/app` folder.
+## /app folder
+The python API and FastAPI backend live in the `/app` folder.
 Update these files to get different responses from Chat GPT on openAI.
-Every time you make a change to the app folder, you need to save and run "cdk deploy" to update the AWS Lambda service on AWS API Gateway.
+Every time you make a change to the app folder, you need to save and run `cdk deploy` to update the `AWS Lambda` service on `AWS API Gateway`.
 
-## /brand-helper-site filder
+## /brand-helper-site folder
 The Next.JS front end lives in the `/brand-helper-site` folder.
 Modify these files to change the themes, text, and browser behavior of the app.
-Don't forget to push your files to github to auto-update the Vercel Host if you put this on a website.
+Pushing files to GitHub triggers `Continuous Deployment` to the Vercel Host.
 
 ## To Duplicate this App on your local machine and your own AWS Account
-Clone this repo, and make sure you already have `python3`, `Yarn`, and `node` installed. Then duplicate the frontend and backend. 
+Clone this repo, and make sure you already have `python3`, `Yarn`, and `node` installed. Then duplicate the frontend and infrastructure using the guide below. 
 
-### Duplicate the frontend:
+### Front End Setup Guide:
 1. `cd brand-helper-site` folder from the terminal.
 2. `yarn install` to install all dependencies
-3. Optionally, if you want to make this a webApp, you can host this frontend for free `Vercel.com/docs` -> `quickstart` -> `Next.js` -> `Deploy`.
+3. You can host this frontend for free by visiting `Vercel.com/docs` -> `quickstart` -> `Next.js` -> `Deploy`.
 
-### Duplicate repo backend:
+### Infrastructure Setup Guide:
 1. From the main directory, have `node` and `python3` installed.
 2. From the main directory, run `pip install fastAPI` , `pip install mangum` and `pip install awscli`
-3. Navigate 1 folder down: `cd insfrastructure`. 
+3. Navigate 1 folder down: `cd infrastructure`. 
 4. Run `yarn add aws-cdk-lib` per AWS CDK instructions online.
-5. From the main folder, run `sudo npm install -g aws-cdk` to get the cloud developement kit which pushes your code to the server.
+5. From the main folder, run `sudo npm install -g aws-cdk` to get the cloud development kit which pushes your code to the server.
 6. Create an AWS account, and setup `AWS Lambda` and `AWS API Gateway`.
    -You need to set up an IAM user and generate an access key and secrete key to actually use the CDK through code.
 7. Run `yarn add aws-cdk-lib` per AWS CDK instructions online.
-8. To get the infrastructure code to your AWS accout, Run `cdk bootsrap aws://<12-digit-aws-accountnumber>/<zone>`. Zone example `<us-west-2>`
+8. To get the infrastructure code to your AWS accout, Run `cdk bootstrap aws://<12-digit-aws-accountnumber>/<zone>`. Zone example `<us-west-2>`
 9. Navigate to `infrastructure` with `cd infrastructure`. Run `npm build` to build the infrastructure. Note that the rest of the project uses yarn, but the infrastructure folder uses npm which is aws cli native. This entire `infrastructure` folder was intitialized by the Cloud Developement Kit with `cdk init --language typescript`.
-10. Run `aws configure` and enter your access key and sectret access key (these are found from your IAM account)
+10. Run `aws configure` and enter your access key and secret access key (these are found from your IAM account)
 11. Create and save a .env file within the `infrastructure` folder with 1 line of code: `OPEN_API_KEY="xx-xxxxxxxxxxxxxxxxxxxxxxxxx`. All `.env` files are in the `.gitIgnore` file, but you should double check.
 12. To get the `infrastructure-stack.ts` to access the API key within the environment variable, run `yarn add dotenv`.
 13. Navigate: `cd infrastructure/lambda_base_layer`.
 14. If using `WSL` install docker with `sudo ap install docker.io` in order to prepare dependencies which we will imbedin the lambda base layer. Start docker.
-   - (since WSL doesn't have a `systemedd`, run `sudo update-alternateives --config iptables` ans select 1 `iptables-lagacy` 
+   - (since WSL doesn't have a `systemedd`, run `sudo update-alternateives --config iptables` and select 1 `iptables-lagacy` 
    - `sudo service docker start` )
-15. run `sudo ./generate_base_layer.sh` to run the script to put python and all dependencies on the docker image. This will generate a zip file that you can deploy to the cloud via cdk deploy. Any time you want to add a new dependency to your container, just add thedependency to `/infrastructure/requirements.txt` and re-run `sudo generate_base_layer.sh`, then redeploy `cdk deploy` to AWS.
+15. run `sudo ./generate_base_layer.sh` to run the script to put python and all dependencies on the docker image. This will generate a zip file that you can deploy to the cloud via cdk deploy. Any time you want to add a new dependency to your container, just add the dependency to `/infrastructure/requirements.txt` and re-run `sudo generate_base_layer.sh`, then redeploy `cdk deploy` to AWS.
 16. Run `cdk deploy` (creates lambda function on your account and sets up the backend).
 
 
