@@ -1,20 +1,18 @@
 # AWS Marketing App
 
 ## What Is It?
--This App was created to demonstrate proficiency with serverless, cloud-based microservices, particularly `AWS Lambda` and `AWS API Gateway`.
--This App has been updated as OpenAI continues to deprecate old models (such as`GPT-3` `text-ADA-001`).
-
--Go to https://aws-marketing-app.vercel.app/ to try out the App!
--Type in words describing your brand, and get a social media caption and keywords/hashtags! 
-
--If you live in the US near Oregon (AWS US-west-2 ), you can expect results in 2-3 seconds. 
--If you live on the East coast, latency can be 8 seconds for the 1st request but will improve the more you use the app.
+- This App was created to demonstrate proficiency with serverless, cloud-based microservices, particularly `AWS Lambda` and `AWS API Gateway`.
+- This App has been updated as OpenAI continues to deprecate old models (such as`GPT-3` `text-ADA-001`).
+- Go to https://aws-marketing-app.vercel.app/ to try out the App!
+- Type in words describing your brand, and get a social media caption and keywords/hashtags! 
+- If you live in the US near Oregon (AWS US-west-2 ), you can expect results in 2-3 seconds. 
+- If you live on the East coast, latency can be 8 seconds for the 1st request but will improve the more you use the app.
 
 ![alt text](https://github.com/RamonJOrtega/AWS_Marketing_App/blob/main/appPicture1.png)
 ![alt text](https://github.com/RamonJOrtega/AWS_Marketing_App/blob/main/appPictureLoading.png)
 ![alt text](https://github.com/RamonJOrtega/AWS_Marketing_App/blob/main/appPIcture2.png)
 
-### `openAI` Model: `GPT-3.5-Turbo`.
+### `openAI` Model: `GPT-3.5-Turbo`
 - This is the fastest, lowest cost GPT model capable of simple tasks.
 - The financial cost of running this app is currently `$0.001`/`1000 tokens` or `$0.005`/`request`.
 - Each `request` is approximately 31 characters which usually equates to about `13 tokens`.
@@ -95,5 +93,3 @@ Clone this repo, and make sure you already have `python3`, `Yarn`, and `node` in
    - `sudo service docker start` )
 15. run `sudo ./generate_base_layer.sh` to run the script to put python and all dependencies on the docker image. This will generate a zip file that you can deploy to the cloud via cdk deploy. Any time you want to add a new dependency to your container, just add the dependency to `/infrastructure/requirements.txt` and re-run `sudo generate_base_layer.sh`, then redeploy `cdk deploy` to AWS.
 16. Run `cdk deploy` (creates lambda function on your account and sets up the backend).
-
-
