@@ -1,4 +1,4 @@
-FROM amazonlinux:2
+FROM amazonlinux:2.0.20230307.0
 
 #install python
 RUN yum install -y python37 && \
@@ -14,7 +14,7 @@ RUN source base/bin/activate
 
 #install dependencies
 COPY ./requirements.txt .
-RUN pip install -r requirements.txt -t ./python
+RUN pip install -r requirements.txt --platform linux/arm64 -t ./python --only-binary=:all:
 
 #zip it all up for deployment
 RUN zip -r layer.zip ./python
