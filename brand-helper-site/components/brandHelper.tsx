@@ -17,7 +17,6 @@ const BrandHelper: React.FC = () => {
     const [isLoading, setIsLoading] = React.useState(false);
 
     const onSubmit = () => {
-        console.log("Submitting: " + prompt);
         setIsLoading(true);
         fetch(`${ENDPOINT_SNIPPET}?prompt=${prompt}`).then((res) => res.json()).then(onResultSnippet);
         fetch(`${ENDPOINT_KEYWORDS}?prompt=${prompt}`).then((res) => res.json()).then(onResultKeywords)
