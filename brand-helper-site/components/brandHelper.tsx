@@ -6,8 +6,8 @@ import logo from "../public/bronze 2.png"
 
 const BrandHelper: React.FC = () => {
     const CHARACTER_LIMIT: number = 32; //exclusive limit, so really only 31 characters valid
-    const ENDPOINT_SNIPPET = 'https://55mgcbkr77.execute-api.us-west-2.amazonaws.com/prod/generate_snippet_and_keywords';
-    const ENDPOINT_KEYWORDS = 'https://55mgcbkr77.execute-api.us-west-2.amazonaws.com/prod/generate_snippet_and_keywords';
+    const ENDPOINT_SNIPPET = 'https://55mgcbkr77.execute-api.us-west-2.amazonaws.com/prod/generate_snippet';
+    const ENDPOINT_KEYWORDS = 'https://55mgcbkr77.execute-api.us-west-2.amazonaws.com/prod/generate_keywords';
     const [prompt, setPrompt] = React.useState("");
     const [snippet, setSnippet] = React.useState("");
     const [keywords, setKeywords] = React.useState([]);
