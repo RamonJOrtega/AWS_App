@@ -6,38 +6,47 @@ import logo from "../public/bronze 2.png"
 
 const BrandHelper: React.FC = () => {
     const CHARACTER_LIMIT: number = 32; //exclusive limit, so really only 31 characters valid
-    const ENDPOINT = 'https://55mgcbkr77.execute-api.us-west-2.amazonaws.com/prod/generate_snippet_and_keywords';
+    const ENDPOINT_SNIPPET = 'https://55mgcbkr77.execute-api.us-west-2.amazonaws.com/prod/generate_snippet_and_keywords';
+    const ENDPOINT_KEYWORDS = 'https://55mgcbkr77.execute-api.us-west-2.amazonaws.com/prod/generate_snippet_and_keywords';
     const [prompt, setPrompt] = React.useState("");
     const [snippet, setSnippet] = React.useState("");
     const [keywords, setKeywords] = React.useState([]);
-    const [hasResult, setHasResult] = React.useState(false);
+    
+    const [hasKeywordResult, setHasKeywordResult] = React.useState(false);
+    const [hasSnippetResult, setHasSnippetResult] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
 
     const onSubmit = () => {
         console.log("Submitting: " + prompt);
         setIsLoading(true);
-        fetch(`${ENDPOINT}?prompt=${prompt}`)
-            .then((res) => res.json())
-            .then(onResult);
+        fetch(`${ENDPOINT_SNIPPET}?prompt=${prompt}`).then((res) => res.json()).then(onResultSnippet);
+        fetch(`${ENDPOINT_KEYWORDS}?prompt=${prompt}`).then((res) => res.json()).then(onResultKeywords)
     };
 
-    const onResult = (data: any) => {
+    const onResultSnippet = (data: any) => {
         setSnippet(data.snippet);
+        setHasSnippetResult(true);
+        setIsLoading(false);
+    }
+
+    const onResultKeywords = (data: any) => {
         setKeywords(data.keywords);
-        setHasResult(true);
+        setHasKeywordResult(true);
         setIsLoading(false);
     }
 
     const onReset = () => {
         setPrompt("");
-        setHasResult(false);
+        setHasSnippetResult(true);
+        setHasSnippetResult(false);
+        setHasKeywordResult(true);
         setIsLoading(false);
     }
 
     let displayedElement = null;
 
     let ResultsElement = null;
-    if (hasResult) {
+    if (hasKeywordResult && hasSnippetResult) {
         displayedElement = <Results snippet={snippet} keywords={keywords} onBack={onReset} prompt={prompt} />
     } else {
         displayedElement = <Form prompt={prompt} setPrompt={setPrompt} onSubmit={onSubmit} isLoading={isLoading} characterLimit={CHARACTER_LIMIT} />;
